@@ -1,0 +1,390 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    background-color: rgb(206, 51, 51);
+}
+
+.backdrop-header{
+    transition: all 0.3s;
+}
+
+/* Contenedor en forma de telefono */
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    /* padding: 30px 0; */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    position: relative;
+}
+
+/* Efecto para aparecer el contenedor en forma de movil
+cuando la pantalla sea bastante grande */
+@media (min-width:768px) {
+    .wrapper {
+        height: 50rem;
+        width: 25rem;
+        border-radius: 40px;
+        border: 10px solid #2e2e2e;
+    }
+}
+
+/* Encabezado de fondo */
+.backdrop-header {
+    width: 100%;
+    height: 30%;
+    background-color: #173f5a;
+    padding: 2rem;
+}
+
+/* Cola del encabezado (parte redonda) */
+.backdrop-tail{
+    width: 100%;
+    height: 10%;
+    border-radius: 0 0 50% 50%;
+    background-color: #173f5a;
+}
+
+/* Botón de menú  */
+.menu-btn {
+    width: 2rem;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+/* Contenedor de mensaje e bienvenida y calendario */
+.welcome{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+/* Titulo que muestra el nombre del usuario */
+.welcome h1 {
+    font-size: 1.5rem;
+}
+
+/* Parrafo que muestra la cantidad de tareas para el dia */
+.welcome p {
+    font-weight: 500;
+}
+
+/* Contenedor que muestra el botón calendario y la fecha */
+.welcome .calendary{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Circulo de fondo para el botón calendario */
+.calendary .backdrop{
+    width: 3.8rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: #fdfde5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Imagen del botón calendario */
+.calendary .backdrop img{
+    width: 4rem;
+}
+
+/* Parrafo que muestra la fecha */
+.calendary p{
+    font-size: 0.6rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/*---------------------- Task  styles -----------------*/
+
+/* Sección o apartado donde se muestran las tareas */
+.task-section {
+    padding: 0 30px;
+    margin-top: 1rem;
+    height: calc(100% - 12rem);
+    padding-bottom: 20px;
+    overflow: auto;
+}
+
+/* Agrupador de tarea */
+.task-wrapper {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 4rem;
+
+}
+
+/* Tarjeta o contenedor de tarea */
+.task {
+    background: #fff;
+    border-radius: 0.5rem;
+    padding: 1.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 20px 5px #00000023;
+    transition: all 0.3s;
+}
+
+.task:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px 5px #00000040;
+}
+
+.task-label {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: max-content;
+    cursor: pointer;
+    color: #414141;
+}
+
+.task-label input {
+    display: none;
+}
+
+.task-label .task-info{
+    padding-left: 0.8rem;
+}
+
+.task-label .task-info p {
+    color: #424242;
+    /* opacity: 0.6; */
+}
+
+.task-label .task-info div {
+    color: #2e2e2e;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-top: 0.3rem;
+}
+
+.task-label .checkmark {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 2px;
+    border: 1px solid #2e2e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-label .checkmark svg {
+    width: 1rem;
+    color: #2e2e2e;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.task-label:hover .checkmark svg {
+    opacity: 1;
+}
+
+.task-label .checkmark svg path {
+    stroke-width: 3;
+}
+
+.task-label input:checked~.checkmark {
+    background-color: #2e2e2e;
+}
+
+.task-label input:checked~.checkmark svg {
+    opacity: 1;
+    color: #fff;
+}
+
+.task-label input:checked ~ .task-info p {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+
+
+.task .delete {
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: #2e2e2e;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.031);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.task:hover .delete {
+    opacity: 1;
+    visibility: visible;
+}
+
+.task .delete:hover {
+    color: red;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ------------------------- add task styles ------------------------- */
+
+/* Botón agregar nueva tarea */
+.add-task-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #39a6f0;
+    transition: all 0.3s;
+}
+
+.add-task-btn:hover {
+    transform: scale(1.1);
+}
+
+.add-task-btn.active {
+    z-index: 1;
+    bottom: 20rem;
+    transform: rotate(45deg);
+}
+
+.add-task-btn svg {
+    width: 2rem;
+    color: #fff;
+}
+
+/* Difuminado del fondo al apretar boton agregar tarea */
+.blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: #00000023;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.blur.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Formulario para agregar tarea */
+.add-task-form {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 20px 30px;
+    transition: all 0.3s;
+}
+
+.add-task-form.active {
+    bottom: 0;
+}
+
+.add-task-form .heading {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group input,
+.input-group label {
+    display: block;
+    width: 100%;
+}
+
+.input-group input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.input-group label {
+    width: max-content;
+    padding: 0 5px;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btns button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+button.add-btn {
+    background-color: #39a6f0;
+    color: #fff
+}
+
+.add-task-backdrop {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 135%;
+    height: 20rem;
+    border-radius: 50% 50% 0 0;
+    background-color: #fff;
+}
+
+/* ---- Menu styles------------ */
+.menu{
+    height: 100%;
+    width: 100%;
+}
